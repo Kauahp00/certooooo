@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Vocacional</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div id="content">
+        <!-- Primeira pergunta -->
+        <div class="card">
+            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231001/pngtree-digital-tablet-mockup-on-wooden-worktable-a-view-from-above-perfect-image_13564991.png" alt="Descrição da Imagem" class="card-img">
+            <h3><p class="card-question">Pergunta 1</p></h3>
+        </div>
+        <div class="inputs">
+            <button class="input alternativa-btn" id="botao-1" onclick="registrarResposta('GRP1'); proximaPergunta(1)">Resposta 1</button>
+            <button class="input alternativa-btn" id="botao-2" onclick="registrarResposta('GRP2'); proximaPergunta(1)">Resposta 2</button>
+            <button class="input alternativa-btn" id="botao-3" onclick="registrarResposta('GRP3'); proximaPergunta(1)">Resposta 3</button>
+            <button class="input alternativa-btn" id="botao-4" onclick="registrarResposta('GRP4'); proximaPergunta(1)">Resposta 4</button>
+        </div>
+    </div>
+
+    <script>
+
+        // Inicializa ou carrega pontuação do Local Storage
+let pontuacao = {
+    GRP1: 0,
+    GRP2: 0,
+    GRP3: 0,
+    GRP4: 0
+};
+
+// Zera a pontuação no Local Storage quando o teste inicia
+function iniciarTeste() {
+    localStorage.removeItem('pontuacao'); // Remove qualquer pontuação existente
+    pontuacao = {
+        GRP1: 0,
+        GRP2: 0,
+        GRP3: 0,
+        GRP4: 0
+    };
+    console.log('Pontuação inicializada:', pontuacao);
+}
+
+// Atualiza a pontuação e armazena no Local Storage
+function registrarResposta(resposta) {
+    pontuacao[resposta]++;
+    localStorage.setItem('pontuacao', JSON.stringify(pontuacao));
+    console.log(`Pontos Atualizados:`, pontuacao);
+}
+
+
+
+
+        // Função para exibir a próxima pergunta
+        function proximaPergunta(pergunta) {
+            if (pergunta === 1) {
+                document.getElementById('content').innerHTML = `
+                    <div class="container">
+                        <div class="card">
+                            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231001/pngtree-digital-tablet-mockup-on-wooden-worktable-a-view-from-above-perfect-image_13564991.png" alt="Descrição da Imagem" class="card2-img">
+                            <h3><p class="card2-question">Pergunta 2</p></h3>
+                        </div>
+                        <div class="inputs2">
+                            <button class="input2 alternativa-btn" id="botao-1" onclick="registrarResposta('GRP1'); proximaPergunta(2)">Resposta A</button>
+                            <button class="input2 alternativa-btn" id="botao-2" onclick="registrarResposta('GRP2'); proximaPergunta(2)">Resposta B</button>
+                            <button class="input2 alternativa-btn" id="botao-3" onclick="registrarResposta('GRP3'); proximaPergunta(2)">Resposta C</button>
+                            <button class="input2 alternativa-btn" id="botao-4" onclick="registrarResposta('GRP4'); proximaPergunta(2)">Resposta D</button>
+                        </div>
+                    </div>
+                `;
+            } else if (pergunta === 2) {
+                document.getElementById('content').innerHTML = `
+                    <div class="container">
+                        <div class="card2">
+                            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231001/pngtree-digital-tablet-mockup-on-wooden-worktable-a-view-from-above-perfect-image_13564991.png" alt="Descrição da Imagem" class="card2-img">
+                            <h3><p class="card2-question">Pergunta 3</p></h3>
+                        </div>
+                        <div class="inputs2">
+                            <button class="input2 alternativa-btn" id="botao-1" onclick="registrarResposta('GRP1'); proximaPergunta(3)">Resposta A</button>
+                            <button class="input2 alternativa-btn" id="botao-2" onclick="registrarResposta('GRP2'); proximaPergunta(3)">Resposta B</button>
+                            <button class="input2 alternativa-btn" id="botao-3" onclick="registrarResposta('GRP3'); proximaPergunta(3)">Resposta C</button>
+                            <button class="input2 alternativa-btn" id="botao-4" onclick="registrarResposta('GRP4'); proximaPergunta(3)">Resposta D</button>
+                        </div>
+                    </div> 
+                `;}else if (pergunta === 3) {
+                document.getElementById('content').innerHTML = `
+                    <div class="container">
+                        <div class="card2">
+                            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231001/pngtree-digital-tablet-mockup-on-wooden-worktable-a-view-from-above-perfect-image_13564991.png" alt="Descrição da Imagem" class="card2-img">
+                            <h3><p class="card2-question">Pergunta 4</p></h3>
+                        </div>
+                        <div class="inputs2">
+                            <button class="input2 alternativa-btn" id="botao-1" onclick="registrarResposta('GRP1'); proximaPergunta(4)">Resposta A</button>
+                            <button class="input2 alternativa-btn" id="botao-2" onclick="registrarResposta('GRP2'); proximaPergunta(4)">Resposta B</button>
+                            <button class="input2 alternativa-btn" id="botao-3" onclick="registrarResposta('GRP3'); proximaPergunta(4)">Resposta C</button>
+                            <button class="input2 alternativa-btn" id="botao-4" onclick="registrarResposta('GRP4'); proximaPergunta(4)">Resposta D</button>
+                        </div>
+                    </div> 
+                `;} else if (pergunta === 4) {
+                // Chama a função para verificar a pontuação e redirecionar
+                verificarPontuacao();
+            }
+        }
+
+       // Função para verificar a pontuação e redirecionar
+       function verificarPontuacao() {
+        // Salva a pontuação final no localStorage (já está sendo salvo nas funções anteriores)
+    localStorage.setItem('pontuacao', JSON.stringify(pontuacao));
+
+// Redireciona para a página desejada
+window.location.href = 'jogo1.html'; // Substitua pelo URL correto
+}
+            
+            
+            // Chama a função para iniciar o teste ao carregar a página
+window.onload = iniciarTeste;
+
+        
+    </script>
+</body>
+</html>

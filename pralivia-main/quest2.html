@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuação do Teste Vocacional</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div id="content">
+        <!-- Pergunta 8 -->
+        <div class="card">
+            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231001/pngtree-digital-tablet-mockup-on-wooden-worktable-a-view-from-above-perfect-image_13564991.png" alt="Descrição da Imagem" class="card-img">
+            <h3><p class="card-question">Pergunta 5</p></h3>
+        </div>
+        <div class="inputs">
+            <button class="input alternativa-btn" id="botao-1" onclick="registrarResposta('GRP1'); proximaPergunta(5)">Resposta 1</button>
+            <button class="input alternativa-btn" id="botao-2" onclick="registrarResposta('GRP2'); proximaPergunta(5)">Resposta 2</button>
+            <button class="input alternativa-btn" id="botao-3" onclick="registrarResposta('GRP3'); proximaPergunta(5)">Resposta 3</button>
+            <button class="input alternativa-btn" id="botao-4" onclick="registrarResposta('GRP4'); proximaPergunta(5)">Resposta 4</button>
+        </div>
+    </div>
+
+    <script>
+        // Carrega pontuação existente ou inicializa com valores do Local Storage
+        let pontuacao = JSON.parse(localStorage.getItem('pontuacao')) || {
+            GRP1: 0,
+            GRP2: 0,
+            GRP3: 0,
+            GRP4: 0
+        };
+
+        // Função para registrar a resposta e atualizar pontuação
+        function registrarResposta(resposta) {
+    pontuacao[resposta]++;
+    localStorage.setItem('pontuacao', JSON.stringify(pontuacao));
+    console.log('Pontos Atualizados:', pontuacao);
+}
+
+        // Função para exibir a próxima pergunta da segunda página
+        function proximaPergunta(pergunta) {
+    // Salva a pontuação da página atual no localStorage
+    localStorage.setItem('pontuacao_pagina_atual', JSON.stringify(pontuacao));
+
+    if (pergunta === 5) {
+        // Atualiza para a Pergunta 6
+        document.getElementById('content').innerHTML = `
+            <div id="content">
+                <!-- Pergunta 6 -->
+                <div class="card">
+                    <img src="..." alt="Descrição da Imagem" class="card-img">
+                    <h3><p class="card-question">Pergunta 6</p></h3>
+                </div>
+                <div class="inputs">
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP1'); proximaPergunta(6)">Resposta 1</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP2'); proximaPergunta(6)">Resposta 2</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP3'); proximaPergunta(6)">Resposta 3</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP4'); proximaPergunta(6)">Resposta 4</button>
+                </div>
+            </div>
+        `;
+    } else if (pergunta === 6) {
+        // Atualiza para a Pergunta 7
+        document.getElementById('content').innerHTML = `
+            <div id="content">
+                <!-- Pergunta 7 -->
+                <div class="card">
+                    <img src="..." alt="Descrição da Imagem" class="card-img">
+                    <h3><p class="card-question">Pergunta 7</p></h3>
+                </div>
+                <div class="inputs">
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP1'); proximaPergunta(7)">Resposta 1</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP2'); proximaPergunta(7)">Resposta 2</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP3'); proximaPergunta(7)">Resposta 3</button>
+                    <button class="input alternativa-btn" onclick="registrarResposta('GRP4'); proximaPergunta(7)">Resposta 4</button>
+                </div>
+            </div>
+        `;
+    } else if (pergunta === 7) {
+        verificarPontuacao(); // Redireciona para a página final
+    }
+}
+
+        // Função para verificar a pontuação final e redirecionar
+        function verificarPontuacao() {
+    // Salva a pontuação final no localStorage (já está sendo salvo nas funções anteriores)
+    localStorage.setItem('pontuacao', JSON.stringify(pontuacao));
+
+    // Redireciona para a página desejada
+    window.location.href = 'jogo2.html'; // Substitua pelo URL correto
+
+    
+}
+    </script>
+</body>
+</html>
